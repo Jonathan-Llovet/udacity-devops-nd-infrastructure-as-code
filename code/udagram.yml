@@ -1,0 +1,27 @@
+Parameters:
+
+Resources:
+
+    WebAppLaunchConfig:
+        Type: AWS::AutoScaling::LaunchConfiguration
+        Properties:
+          UserData:
+            Fn::Base64: !Sub |
+              #!/bin/bash
+              apt-get update -y
+              apt-get install unzip awscli -y
+              apt-get install apache2 -y
+              systemctl start apache2.service
+              cd /var/www/html
+              aws s3 cp s3://udacity-demo-1/udacity.zip .
+              unzip -o udacity.zip
+          ImageId: ami-085925f297f89fce1
+          KeyName: udagram-server
+          SecurityGroups:
+          - Ref: WebServerSecGroup
+          InstanceType: t3.medium
+          BlockDeviceMappings:
+          - DeviceName: "/dev/sdk"
+            Ebs:
+              VolumeSize: '10'
+Outputs:

@@ -127,8 +127,17 @@ Resources:
         - Key: Name
           Value: !Sub ${Environment} Private Subnet (AZ2)
   
-  # NatGateway1ElasticIP
-  # NatGateway2ElasticIP
+  NatGateway1ElasticIP:
+    Type: AWS::EC2::EIP
+      DependsOn: InternetGatewayAttachment
+      Properties:
+          Domain: vpc
+
+  NatGateway2ElasticIP:
+    Type: AWS::EC2::EIP
+      DependsOn: InternetGatewayAttachment
+      Properties:
+          Domain: vpc
   # NatGateway1
   # NatGateway2
 

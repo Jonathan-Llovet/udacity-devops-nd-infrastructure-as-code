@@ -126,10 +126,7 @@ Resources:
           Value: !Ref Owner
         - Key: Name
           Value: !Sub ${Environment} Private Subnet (AZ2)
-  # PublicSubnet1
-  # PublicSubnet2
-  # PrivateSubnet1
-  # PrivateSubnet2
+  
   # NatGateway1ElasticIP
   # NatGateway2ElasticIP
   # NatGateway1

@@ -165,7 +165,16 @@ Resources:
 # Public Routing
 ############################################################
 
-# PublicRouteTable
+  PublicRouteTable:
+    Type: AWS::EC2::RouteTable
+      Properties:
+        VpcId: !Ref VPC
+        Tags:
+          - Key: Owner
+            Value: !Ref Owner
+          - Key: Name
+            Value: !Sub ${Environment}-Public-Route-Table
+
 # DefaultPublicRoute
 # PublicSubnet1RouteTableAssociation
 # PublicSubnet2RouteTableAssociation

@@ -161,6 +161,31 @@ Resources:
         - Key: Name
           Value: !Sub ${Environment}-NatGateway2
 
+############################################################
+# Public Routing
+############################################################
+
+# PublicRouteTable
+# DefaultPublicRoute
+# PublicSubnet1RouteTableAssociation
+# PublicSubnet2RouteTableAssociation
+
+############################################################
+# Private Routing
+############################################################
+
+# AZ 1
+
+# PrivateRouteTable1
+# DefaultPrivateRoute1
+# PrivateSubnet1RouteTableAssociation
+
+# AZ 2
+# PrivateRouteTable2
+# DefaultPrivateRoute2
+# PrivateSubnet2RouteTableAssociation
+
+
   AllowS3AccessForUdagramWebApp:
     Type: AWS::IAM::Role
     Properties:

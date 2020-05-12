@@ -24,6 +24,26 @@ Parameters:
     Type: String
     Default: 10.0.0.0/16
 
+  PublicSubnet1CIDR:
+    Description: CIDR block of public subnet in first availability zone
+    Type: String
+    Default: 10.0.0.0/24
+
+  PublicSubnet2CIDR:
+    Description: CIDR block of public subnet in second availability zone
+    Type: String
+    Default: 10.0.1.0/24
+
+  PrivateSubnet1CIDR:
+    Description: CIDR block of private subnet in first availability zone
+    Type: String
+    Default: 10.0.2.0/24
+
+  PrivateSubnet2CIDR:
+    Description: CIDR block of private subnet in second availability zone
+    Type: String
+    Default: 10.0.3.0/24
+
 Resources:
 
   VPC:

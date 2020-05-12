@@ -193,7 +193,7 @@ Resources:
           - Key: Owner
             Value: !Ref Owner
           - Key: Name
-            Value: !Sub ${EnvironmentName}-Private-Route-Table-(AZ1)
+            Value: !Sub ${Environment}-Private-Route-Table-(AZ1)
 # DefaultPrivateRoute1
 # PrivateSubnet1RouteTableAssociation
 
@@ -206,7 +206,7 @@ Resources:
           - Key: Owner
             Value: !Ref Owner
           - Key: Name
-            Value: !Sub ${EnvironmentName}-Private-Route-Table-(AZ2)
+            Value: !Sub ${Environment}-Private-Route-Table-(AZ2)
 # DefaultPrivateRoute2
 # PrivateSubnet2RouteTableAssociation
 

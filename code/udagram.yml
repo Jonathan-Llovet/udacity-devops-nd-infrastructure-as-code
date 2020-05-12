@@ -12,6 +12,11 @@ Parameters:
     Description: An environment name that will be prefixed to resources
     Type: String
     Default: Dev
+    AllowedValues:
+      - Dev
+      - Test
+      - QA
+      - Prod
 
 Resources:
 

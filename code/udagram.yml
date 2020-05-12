@@ -8,8 +8,8 @@ Parameters:
     AllowedPattern: '/[^\s@]+@[^\s@]+\.[^\s@]+/'
     Default: jonathan.llovet@gmail.com
 
-  EnvironmentName:
-    Description: An environment name that will be prefixed to resources
+  Environment:
+    Description: Name of the environment - will be prefixed to resources
     Type: String
     Default: Dev
     AllowedValues:

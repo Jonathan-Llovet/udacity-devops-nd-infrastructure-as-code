@@ -185,6 +185,9 @@ Resources:
 # DefaultPrivateRoute2
 # PrivateSubnet2RouteTableAssociation
 
+############################################################
+# EC2 Instances
+############################################################
 
   AllowS3AccessForUdagramWebApp:
     Type: AWS::IAM::Role

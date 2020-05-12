@@ -26,7 +26,16 @@ Parameters:
 
 Resources:
 
-  # VPC
+  VPC:
+    Type: AWS::EC2::VPC
+    Properties:
+        CidrBlock: !Ref VpcCIDR
+        EnableDnsHostnames: true
+        Tags:
+            - Key: Owner
+              Value: !Ref Owner
+            - Key: Name
+              Value: !Sub "${EnvironmentName}-VPC"
   # InternetGateway
   # InternetGatewayAttachment
   # PublicSubnet1

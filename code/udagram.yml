@@ -86,7 +86,7 @@ Resources:
         - Key: Owner
           Value: !Ref Owner
         - Key: Name
-          Value: !Sub ${Environment} Public Subnet (AZ1)
+          Value: !Sub ${Environment}-Public-Subnet-(AZ1)
 
   PublicSubnet2:
     Type: AWS::EC2::Subnet
@@ -99,7 +99,7 @@ Resources:
         - Key: Owner
           Value: !Ref Owner
         - Key: Name
-          Value: !Sub ${Environment} Public Subnet (AZ2)
+          Value: !Sub ${Environment}-Public-Subnet-(AZ2)
 
   PrivateSubnet1:
     Type: AWS::EC2::Subnet
@@ -112,7 +112,7 @@ Resources:
         - Key: Owner
           Value: !Ref Owner
         - Key: Name
-          Value: !Sub ${Environment} Private Subnet (AZ1)
+          Value: !Sub ${Environment}-Private-Subnet-(AZ1)
 
   PrivateSubnet2:
     Type: AWS::EC2::Subnet
@@ -125,7 +125,7 @@ Resources:
         - Key: Owner
           Value: !Ref Owner
         - Key: Name
-          Value: !Sub ${Environment} Private Subnet (AZ2)
+          Value: !Sub ${Environment}-Private-Subnet-(AZ2)
   
   NatGateway1ElasticIP:
     Type: AWS::EC2::EIP

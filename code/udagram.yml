@@ -138,8 +138,28 @@ Resources:
       DependsOn: InternetGatewayAttachment
       Properties:
           Domain: vpc
-  # NatGateway1
-  # NatGateway2
+
+  NatGateway1:
+    Type: AWS::EC2::NatGateway
+    Properties:
+      AllocationId: !GetAtt NatGateway1ElasticIP.AllocationId
+      SubnetId: !Ref PublicSubnet1
+      Tags:
+        - Key: Owner
+          Value: !Ref Owner
+        - Key: Name
+          Value: !Sub ${Environment}-NatGateway1
+
+  NatGateway2:
+    Type: AWS::EC2::NatGateway
+    Properties:
+      AllocationId: !GetAtt NatGateway2ElasticIP.AllocationId
+      SubnetId: !Ref PublicSubnet2
+      Tags:
+        - Key: Owner
+          Value: !Ref Owner
+        - Key: Name
+          Value: !Sub ${Environment}-NatGateway2
 
   AllowS3AccessForUdagramWebApp:
     Type: AWS::IAM::Role

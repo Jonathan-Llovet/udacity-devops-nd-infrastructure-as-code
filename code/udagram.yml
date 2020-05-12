@@ -178,8 +178,9 @@ Resources:
       ManagedPolicyArns:
         - !Ref AllowGetObjectForUdagramS3Bucket
       RoleName: Allow-S3-Access-For-Udagram-Web-App
-      # Tags: 
-      #   - Tag
+      Tags:
+        - Key: Owner
+          Value: !Ref Owner
 
   AllowGetObjectForUdagramS3Bucket:
     Type: 'AWS::IAM::ManagedPolicy'

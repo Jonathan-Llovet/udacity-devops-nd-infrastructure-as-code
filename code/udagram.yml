@@ -198,7 +198,15 @@ Resources:
 # PrivateSubnet1RouteTableAssociation
 
 # AZ 2
-# PrivateRouteTable2
+  PrivateRouteTable2:
+    Type: AWS::EC2::RouteTable
+      Properties:
+        VpcId: !Ref VPC
+        Tags:
+          - Key: Owner
+            Value: !Ref Owner
+          - Key: Name
+            Value: !Sub ${EnvironmentName}-Private-Route-Table-(AZ2)
 # DefaultPrivateRoute2
 # PrivateSubnet2RouteTableAssociation
 

@@ -36,7 +36,15 @@ Resources:
               Value: !Ref Owner
             - Key: Name
               Value: !Sub "${EnvironmentName}-VPC"
-  # InternetGateway
+  InternetGateway:
+    Type: AWS::EC2::InternetGateway
+    Properties:
+      Tags:
+        - Key: Owner
+          Value: !Ref Owner
+        - Key: Name
+          Value: !Sub "${EnvironmentName}-InternetGateway"
+
   # InternetGatewayAttachment
   # PublicSubnet1
   # PublicSubnet2

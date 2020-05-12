@@ -2,6 +2,15 @@ Description: >
     Jonathan Llovet / Udacity DevOps Engineer ND 2020 - Udagram Project
 
 Parameters:
+  Owner:
+    Description: Email address of resource owner
+    Type: String
+    Default: jonathan.llovet@gmail.com
+
+  EnvironmentName:
+    Description: An environment name that will be prefixed to resources
+    Type: String
+    Default: Dev
 
 Resources:
 

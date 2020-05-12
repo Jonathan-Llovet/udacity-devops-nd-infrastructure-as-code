@@ -20,6 +20,18 @@ Parameters:
 
 Resources:
 
+  # VPC
+  # InternetGateway
+  # InternetGatewayAttachment
+  # PublicSubnet1
+  # PublicSubnet2
+  # PrivateSubnet1
+  # PrivateSubnet2
+  # NatGateway1ElasticIP
+  # NatGateway2ElasticIP
+  # NatGateway1
+  # NatGateway2
+
   AllowS3AccessForUdagramWebApp:
     Type: AWS::IAM::Role
     Properties:

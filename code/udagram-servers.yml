@@ -137,9 +137,10 @@ Resources:
     Properties:
       AvailabilityZone:
         Fn::ImportValue:
-          !Sub "${Environment}-Public-Subnet-AZ1"
+          !Sub ${Environment}-AZ1
       ImageId: ami-0323c3dd2da7fb37d
       InstanceType: t2.micro
+      KeyName: udagram-bastion-host
       SecurityGroups:
         - !Ref BastionHostsSecurityGroup
       Tags:
@@ -153,9 +154,10 @@ Resources:
     Properties:
       AvailabilityZone:
         Fn::ImportValue:
-          !Sub "${Environment}-Public-Subnet-AZ2"
+          !Sub ${Environment}-AZ2
       ImageId: ami-0323c3dd2da7fb37d
       InstanceType: t2.micro
+      KeyName: udagram-bastion-host
       SecurityGroups:
         - !Ref BastionHostsSecurityGroup
       Tags:

@@ -268,6 +268,18 @@ Outputs:
     Export:
       Name: !Sub ${Environment}-VPC
 
+  AvailabilityZone1:
+    Description: A reference to the first Availability Zone
+    Value: !Select [0, !GetAZs '']
+    Export:
+      Name: !Sub ${Environment}-AZ1
+
+  AvailabilityZone2:
+    Description: A reference to the second Availability Zone
+    Value: !Select [1, !GetAZs '']
+    Export:
+      Name: !Sub ${Environment}-AZ2
+
   VPCPublicRouteTable:
     Description: A reference to the public route table for the VPC
     Value: !Ref PublicRouteTable

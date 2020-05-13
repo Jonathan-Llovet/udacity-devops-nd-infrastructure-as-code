@@ -219,7 +219,15 @@ Resources:
             Value: !Ref Owner
           - Key: Name
             Value: !Sub ${Environment}-Private-Route-Table-(AZ1)
-# DefaultPrivateRoute1
+
+  DefaultPrivateRoute1:
+    Type: AWS::EC2::Route
+    DependsOn: InternetGatewayAttachment
+    Properties:
+      RouteTableId: !Ref PrivateRouteTable1
+      DestinationCidrBlock: 0.0.0.0/0 # traffic destination range
+      NatGatewayId: !Ref NatGateway1 # send traffic here
+
 # PrivateSubnet1RouteTableAssociation
 
 # AZ 2
@@ -232,7 +240,15 @@ Resources:
             Value: !Ref Owner
           - Key: Name
             Value: !Sub ${Environment}-Private-Route-Table-(AZ2)
-# DefaultPrivateRoute2
+
+  DefaultPrivateRoute2:
+    Type: AWS::EC2::Route
+    DependsOn: InternetGatewayAttachment
+    Properties:
+      RouteTableId: !Ref PrivateRouteTable2
+      DestinationCidrBlock: 0.0.0.0/0 # traffic destination range
+      NatGatewayId: !Ref NatGateway2 # send traffic here
+
 # PrivateSubnet2RouteTableAssociation
 
 ############################################################

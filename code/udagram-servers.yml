@@ -99,6 +99,23 @@ Resources:
     # WebAppLoadBalancer
     # LoadBalancerListener
     # ApplicationLoadBalancerListenerRule
-    # WebAppTargetGroup
+    WebAppTargetGroup:
+      Type: AWS::ElasticLoadBalancingV2::TargetGroup
+      Properties:
+        HealthCheckIntervalSeconds: 45
+        HealthCheckPath: /
+        HealthCheckPort: 80
+        HealthCheckProtocol: HTTP
+        HealthCheckTimeoutSeconds: 8
+        HealthyThresholdCount: 2
+        Tags:
+          - Key: Owner
+            Value: !Ref Owner
+          - Key: Name
+            Value: Udagram-Web-App-Autoscaling-Target-Group
+        UnhealthyThresholdCount: 5
+        VpcId:
+          Fn::ImportValue:
+            !Sub "${Environment}-VPC"
 
 Outputs:

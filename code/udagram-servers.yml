@@ -119,7 +119,18 @@ Resources:
         Port: '80'
         Protocol: HTTP
 
-    # ApplicationLoadBalancerListenerRule
+    LoadBalancerListenerRule:
+      Type: AWS::ElasticLoadBalancingV2::ListenerRule
+      Properties:
+        Actions:
+        - Type: forward
+          TargetGroupArn: !Ref 'WebAppTargetGroup'
+        Conditions:
+        - Field: path-pattern
+          Values: [/]
+        ListenerArn: !Ref 'LoadBalancerListener'
+        Priority: 1
+
     WebAppTargetGroup:
       Type: AWS::ElasticLoadBalancingV2::TargetGroup
       Properties:

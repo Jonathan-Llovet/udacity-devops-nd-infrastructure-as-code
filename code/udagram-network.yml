@@ -7,7 +7,7 @@ Parameters:
     Description: Email address of resource owner
     Type: String
     Default: jonathan.llovet@gmail.com
-    AllowedPattern: '/[^\s@]+@[^\s@]+\.[^\s@]+/'
+    # AllowedPattern: '/[^\s@]+@[^\s@]+\.[^\s@]+/'
 
   Environment:
     Description: Name of the environment - will be prefixed to resources

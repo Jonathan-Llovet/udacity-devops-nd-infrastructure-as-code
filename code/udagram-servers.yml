@@ -96,7 +96,16 @@ Resources:
         TargetGroupARNs:
         - Ref: WebAppTargetGroup
 
-    # WebAppLoadBalancer
+    # LoadBalancerSecurityGroup:
+
+    WebAppLoadBalancer:
+      Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+      Properties:
+        Subnets:
+        - Fn::ImportValue: !Sub ${Environment}-Public-Subnet-AZ1
+        - Fn::ImportValue: !Sub ${Environment}-Public-Subnet-AZ2
+        SecurityGroups:
+        - Ref: LoadBalancerSecurityGroup
     # LoadBalancerListener
     # ApplicationLoadBalancerListenerRule
     WebAppTargetGroup:

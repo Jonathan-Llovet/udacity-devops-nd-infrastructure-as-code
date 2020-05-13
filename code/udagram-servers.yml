@@ -239,3 +239,16 @@ Resources:
             !Sub "${Environment}-VPC"
 
 Outputs:
+  # AllowS3AccessForUdagramWebApp
+  # AllowGetObjectForUdagramS3Bucket
+  # WebAppLaunchConfig
+  # WebAppGroup
+  # WebServerSecurityGroup
+  # BastionHostsSecurityGroup
+  # BastionHostAZ1
+  # BastionHostAZ2
+  # LoadBalancerSecurityGroup
+  # WebAppLoadBalancer
+  # LoadBalancerListener
+  # LoadBalancerListenerRule
+  # WebAppTargetGroup

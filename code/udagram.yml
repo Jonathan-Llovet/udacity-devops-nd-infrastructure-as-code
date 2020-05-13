@@ -64,6 +64,7 @@ Resources:
           Value: !Ref Owner
         - Key: Name
           Value: !Sub "${Environment}-VPC"
+  
   InternetGateway:
     Type: AWS::EC2::InternetGateway
     Properties:

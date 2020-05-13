@@ -96,7 +96,27 @@ Resources:
         TargetGroupARNs:
         - Ref: WebAppTargetGroup
 
-    # WebServerSecurityGroup:
+    WebServerSecurityGroup:
+      Type: AWS::EC2::SecurityGroup
+      Properties:
+        GroupDescription: Allow HTTP Traffic to Web Server
+        VpcId:
+          Fn::ImportValue:
+            !Sub "${Environment}-VPC"
+        SecurityGroupIngress:
+          - IpProtocol: tcp
+            FromPort: 80
+            ToPort: 80
+            CidrIp: 10.0.0.0/16
+          - IpProtocol: tcp
+            FromPort: 22
+            ToPort: 22
+            CidrIp: 10.0.0.0/16
+        SecurityGroupEgress:
+          - IpProtocol: tcp
+            FromPort: 0
+            ToPort: 65535
+            CidrIp: 0.0.0.0/0:
       
     LoadBalancerSecurityGroup:
       Type: AWS::EC2::SecurityGroup

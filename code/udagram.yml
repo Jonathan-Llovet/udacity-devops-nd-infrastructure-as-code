@@ -50,6 +50,10 @@ Parameters:
 
 Resources:
 
+############################################################
+# Network Infrastructure
+############################################################
+
   VPC:
     Type: AWS::EC2::VPC
     Properties:
@@ -74,6 +78,10 @@ Resources:
     Properties:
       InternetGatewayId: !Ref InternetGateway
       VpcId: !Ref VPC
+
+############################################################
+# Subnets
+############################################################
 
   PublicSubnet1:
     Type: AWS::EC2::Subnet

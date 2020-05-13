@@ -191,8 +191,17 @@ Resources:
       DestinationCidrBlock: 0.0.0.0/0 # traffic destination range
       GatewayId: !Ref InternetGateway # send traffic here
 
-# PublicSubnet1RouteTableAssociation
-# PublicSubnet2RouteTableAssociation
+  PublicSubnet1RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PublicRouteTable
+      SubnetId: !Ref PublicSubnet1
+
+  PublicSubnet2RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+    Properties:
+      RouteTableId: !Ref PublicRouteTable
+      SubnetId: !Ref PublicSubnet2
 
 ############################################################
 # Private Routing

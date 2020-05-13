@@ -83,4 +83,22 @@ Resources:
         Ebs:
           VolumeSize: '10'
 
+    WebAppGroup:
+      Type: AWS::AutoScaling::AutoScalingGroup
+      Properties:
+        VPCZoneIdentifier:
+        - Fn::ImportValue:
+            !Sub "${EnvironmentName}-Private-Subnets"
+        LaunchConfigurationName:
+          Ref: WebAppLaunchConfig
+        MinSize: '4'
+        MaxSize: '6'
+        TargetGroupARNs:
+        - Ref: WebAppTargetGroup
+
+    # WebAppLoadBalancer
+    # LoadBalancerListener
+    # ApplicationLoadBalancerListenerRule
+    # WebAppTargetGroup
+
 Outputs:

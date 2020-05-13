@@ -106,7 +106,19 @@ Resources:
         - Fn::ImportValue: !Sub ${Environment}-Public-Subnet-AZ2
         SecurityGroups:
         - Ref: LoadBalancerSecurityGroup
-    # LoadBalancerListener
+
+    LoadBalancerListener:
+      Type: AWS::ElasticLoadBalancingV2::Listener
+      Properties:
+        DefaultActions:
+        - Type: forward
+          TargetGroupARN:
+            Ref: WebAppTargetGroup
+        LoadBalancerArn:
+          Ref: WebAppLoadBalancer
+        Port: '80'
+        Protocol: HTTP
+
     # ApplicationLoadBalancerListenerRule
     WebAppTargetGroup:
       Type: AWS::ElasticLoadBalancingV2::TargetGroup

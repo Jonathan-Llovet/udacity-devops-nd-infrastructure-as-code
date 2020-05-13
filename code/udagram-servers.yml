@@ -80,172 +80,174 @@ Resources:
       ImageId: ami-085925f297f89fce1
       KeyName: udagram-server
       SecurityGroups:
-      - Ref: WebServerSecGroup
+      - Ref: WebServerSecurityGroup
       InstanceType: t3.medium
       BlockDeviceMappings:
       - DeviceName: "/dev/sdk"
         Ebs:
           VolumeSize: '10'
 
-    WebAppGroup:
-      Type: AWS::AutoScaling::AutoScalingGroup
-      Properties:
-        VPCZoneIdentifier:
-        - Fn::ImportValue:
-            !Sub "${EnvironmentName}-Private-Subnets"
-        LaunchConfigurationName:
-          Ref: WebAppLaunchConfig
-        MinSize: '4'
-        MaxSize: '6'
-        TargetGroupARNs:
-        - Ref: WebAppTargetGroup
+  WebAppGroup:
+    Type: AWS::AutoScaling::AutoScalingGroup
+    Properties:
+      VPCZoneIdentifier:
+      - Fn::ImportValue:
+          !Sub "${Environment}-Private-Subnets"
+      LaunchConfigurationName:
+        Ref: WebAppLaunchConfig
+      MinSize: '4'
+      MaxSize: '6'
+      TargetGroupARNs:
+      - Ref: WebAppTargetGroup
 
-    WebServerSecurityGroup:
-      Type: AWS::EC2::SecurityGroup
-      Properties:
-        GroupDescription: Allow HTTP Traffic to Web Server
-        VpcId:
-          Fn::ImportValue:
-            !Sub "${Environment}-VPC"
-        SecurityGroupIngress:
-          - IpProtocol: tcp
-            FromPort: 80
-            ToPort: 80
-            CidrIp: 10.0.0.0/16
-          - IpProtocol: tcp
-            FromPort: 22
-            ToPort: 22
-            CidrIp: 10.0.0.0/16
-        SecurityGroupEgress:
-          - IpProtocol: tcp
-            FromPort: 0
-            ToPort: 65535
-            CidrIp: 0.0.0.0/0:
-
-    BastionHostsSecurityGroup:
-      Type: AWS::EC2::SecurityGroup
-      Properties:
-        GroupDescription: Enable SSH access via port 22
-        SecurityGroupIngress:
-        - CidrIp: 0.0.0.0/0
+  WebServerSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow HTTP Traffic to Web Server
+      VpcId:
+        Fn::ImportValue:
+          !Sub "${Environment}-VPC"
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 10.0.0.0/16
+        - IpProtocol: tcp
           FromPort: 22
-          IpProtocol: tcp
           ToPort: 22
-    
-    BastionHostAZ1:
-      Type: AWS::EC2::Instance
-      Properties:
-        AvailabilityZone:
-          Fn::ImportValue:
-            !Sub "${Environment}-Public-Subnet-AZ1"
-        ImageId: ami-0323c3dd2da7fb37d
-        InstanceType: t2.micro
-        SecurityGroups:
-          - !Ref BastionHostsSecurityGroup
-        Tags:
-          - Key: Owner
-            Value: !Ref Owner
-          - Key: Name
-            Value: !Sub "${Environment}-Bastion-Host-AZ1"
-    
-    BastionHostAZ2:
-      Type: AWS::EC2::Instance
-      Properties:
-        AvailabilityZone:
-          Fn::ImportValue:
-            !Sub "${Environment}-Public-Subnet-AZ2"
-        ImageId: ami-0323c3dd2da7fb37d
-        InstanceType: t2.micro
-        SecurityGroups:
-          - !Ref BastionHostsSecurityGroup
-        Tags:
-          - Key: Owner
-            Value: !Ref Owner
-          - Key: Name
-            Value: !Sub "${Environment}-Bastion-Host-AZ2"
+          CidrIp: 10.0.0.0/16
+      SecurityGroupEgress:
+        - IpProtocol: tcp
+          FromPort: 0
+          ToPort: 65535
+          CidrIp: 0.0.0.0/0
+
+  BastionHostsSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Enable SSH access via port 22
+      SecurityGroupIngress:
+      - CidrIp: 0.0.0.0/0
+        FromPort: 22
+        IpProtocol: tcp
+        ToPort: 22
+  
+  BastionHostAZ1:
+    Type: AWS::EC2::Instance
+    Properties:
+      AvailabilityZone:
+        Fn::ImportValue:
+          !Sub "${Environment}-Public-Subnet-AZ1"
+      ImageId: ami-0323c3dd2da7fb37d
+      InstanceType: t2.micro
+      SecurityGroups:
+        - !Ref BastionHostsSecurityGroup
+      Tags:
+        - Key: Owner
+          Value: !Ref Owner
+        - Key: Name
+          Value: !Sub "${Environment}-Bastion-Host-AZ1"
+  
+  BastionHostAZ2:
+    Type: AWS::EC2::Instance
+    Properties:
+      AvailabilityZone:
+        Fn::ImportValue:
+          !Sub "${Environment}-Public-Subnet-AZ2"
+      ImageId: ami-0323c3dd2da7fb37d
+      InstanceType: t2.micro
+      SecurityGroups:
+        - !Ref BastionHostsSecurityGroup
+      Tags:
+        - Key: Owner
+          Value: !Ref Owner
+        - Key: Name
+          Value: !Sub "${Environment}-Bastion-Host-AZ2"
 
 ############################################################
 # Load Balancer
 ############################################################
 
-    LoadBalancerSecurityGroup:
-      Type: AWS::EC2::SecurityGroup
-      Properties:
-        GroupDescription: Allow HTTP Traffic to Load Balancer
-        VpcId:
-          Fn::ImportValue:
-            !Sub "${Environment}-VPC"
-        SecurityGroupIngress:
-          - IpProtocol: tcp
-            FromPort: 80
-            ToPort: 80
-            CidrIp: 0.0.0.0/0
-        SecurityGroupEgress:
-          - IpProtocol: tcp
-            FromPort: 80
-            ToPort: 80
-            CidrIp: 0.0.0.0/0
+  LoadBalancerSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow HTTP Traffic to Load Balancer
+      VpcId:
+        Fn::ImportValue:
+          !Sub "${Environment}-VPC"
+      SecurityGroupIngress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
+      SecurityGroupEgress:
+        - IpProtocol: tcp
+          FromPort: 80
+          ToPort: 80
+          CidrIp: 0.0.0.0/0
 
-    WebAppLoadBalancer:
-      Type: AWS::ElasticLoadBalancingV2::LoadBalancer
-      Properties:
-        Subnets:
-        - Fn::ImportValue: !Sub ${Environment}-Public-Subnet-AZ1
-        - Fn::ImportValue: !Sub ${Environment}-Public-Subnet-AZ2
-        SecurityGroups:
-        - Ref: LoadBalancerSecurityGroup
+  WebAppLoadBalancer:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      Subnets:
+      - Fn::ImportValue: !Sub ${Environment}-Public-Subnet-AZ1
+      - Fn::ImportValue: !Sub ${Environment}-Public-Subnet-AZ2
+      SecurityGroups:
+      - Ref: LoadBalancerSecurityGroup
 
-    LoadBalancerListener:
-      Type: AWS::ElasticLoadBalancingV2::Listener
-      Properties:
-        DefaultActions:
-        - Type: forward
-          TargetGroupARN:
-            Ref: WebAppTargetGroup
-        LoadBalancerArn:
-          Ref: WebAppLoadBalancer
-        Port: '80'
-        Protocol: HTTP
+  LoadBalancerListener:
+    Type: AWS::ElasticLoadBalancingV2::Listener
+    Properties:
+      DefaultActions:
+      - Type: forward
+        TargetGroupARN:
+          Ref: WebAppTargetGroup
+      LoadBalancerArn:
+        Ref: WebAppLoadBalancer
+      Port: '80'
+      Protocol: HTTP
 
-    LoadBalancerListenerRule:
-      Type: AWS::ElasticLoadBalancingV2::ListenerRule
-      Properties:
-        Actions:
-        - Type: forward
-          TargetGroupArn: !Ref 'WebAppTargetGroup'
-        Conditions:
-        - Field: path-pattern
-          Values: [/]
-        ListenerArn: !Ref 'LoadBalancerListener'
-        Priority: 1
+  LoadBalancerListenerRule:
+    Type: AWS::ElasticLoadBalancingV2::ListenerRule
+    Properties:
+      Actions:
+      - Type: forward
+        TargetGroupArn: !Ref 'WebAppTargetGroup'
+      Conditions:
+      - Field: path-pattern
+        Values: [/]
+      ListenerArn: !Ref 'LoadBalancerListener'
+      Priority: 1
 
-    WebAppTargetGroup:
-      Type: AWS::ElasticLoadBalancingV2::TargetGroup
-      Properties:
-        HealthCheckIntervalSeconds: 45
-        HealthCheckPath: /
-        HealthCheckPort: 80
-        HealthCheckProtocol: HTTP
-        HealthCheckTimeoutSeconds: 8
-        HealthyThresholdCount: 2
-        Tags:
-          - Key: Owner
-            Value: !Ref Owner
-          - Key: Name
-            Value: Udagram-Web-App-Autoscaling-Target-Group
-        UnhealthyThresholdCount: 5
-        VpcId:
-          Fn::ImportValue:
-            !Sub "${Environment}-VPC"
+  WebAppTargetGroup:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      HealthCheckIntervalSeconds: 45
+      HealthCheckPath: /
+      HealthCheckPort: 80
+      HealthCheckProtocol: HTTP
+      HealthCheckTimeoutSeconds: 8
+      HealthyThresholdCount: 2
+      Port: 80
+      Protocol: HTTP
+      Tags:
+        - Key: Owner
+          Value: !Ref Owner
+        - Key: Name
+          Value: Udagram-Web-App-Autoscaling-Target-Group
+      UnhealthyThresholdCount: 5
+      VpcId:
+        Fn::ImportValue:
+          !Sub "${Environment}-VPC"
 
 Outputs:
-  Role-AllowS3AccessForUdagramWebApp:
+  RoleAllowS3AccessForUdagramWebApp:
     Description: A reference to the IAM Role to allow Udagram apps access to specified S3 bucket
     Value: !Ref AllowS3AccessForUdagramWebApp
     Export:
       Name: Role-Allow-S3-Access-For-Udagram-Web-App
 
-  Policy-AllowGetObjectForUdagramS3Bucket:
+  PolicyAllowGetObjectForUdagramS3Bucket:
     Description: A reference to the IAM ManagedPolicy to allow Udagram apps access to specified S3 bucket
     Value: !Ref AllowGetObjectForUdagramS3Bucket
     Export:

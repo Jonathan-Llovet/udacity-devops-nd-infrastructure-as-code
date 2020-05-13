@@ -228,7 +228,11 @@ Resources:
       DestinationCidrBlock: 0.0.0.0/0 # traffic destination range
       NatGatewayId: !Ref NatGateway1 # send traffic here
 
-# PrivateSubnet1RouteTableAssociation
+  PrivateSubnet1RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+      Properties:
+        RouteTableId: !Ref PrivateRouteTable1
+        SubnetId: !Ref PrivateSubnet1
 
 # AZ 2
   PrivateRouteTable2:
@@ -249,7 +253,11 @@ Resources:
       DestinationCidrBlock: 0.0.0.0/0 # traffic destination range
       NatGatewayId: !Ref NatGateway2 # send traffic here
 
-# PrivateSubnet2RouteTableAssociation
+  PrivateSubnet2RouteTableAssociation:
+    Type: AWS::EC2::SubnetRouteTableAssociation
+      Properties:
+        RouteTableId: !Ref PrivateRouteTable2
+        SubnetId: !Ref PrivateSubnet2
 
 ############################################################
 # EC2 Instances

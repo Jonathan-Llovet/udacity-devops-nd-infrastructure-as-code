@@ -24,26 +24,26 @@ Resources:
 # EC2 Instances
 ############################################################
 
-AllowS3AccessForUdagramWebApp:
-  Type: AWS::IAM::Role
-  Properties:
-    AssumeRolePolicyDocument:
-      Version: '2012-10-17'
-      Statement:
-        - Effect: Allow
-          Principal:
-            Service:
-              - ec2.amazonaws.com
-          Action:
-            - 'sts:AssumeRole'
-    Description: Allow web server EC2 instances to access S3 bucket for Udagram
-    Path: "/"
-    ManagedPolicyArns:
-      - !Ref AllowGetObjectForUdagramS3Bucket
-    RoleName: Allow-S3-Access-For-Udagram-Web-App
-    Tags:
-      - Key: Owner
-        Value: !Ref Owner
+  AllowS3AccessForUdagramWebApp:
+    Type: AWS::IAM::Role
+    Properties:
+      AssumeRolePolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+          - Effect: Allow
+            Principal:
+              Service:
+                - ec2.amazonaws.com
+            Action:
+              - 'sts:AssumeRole'
+      Description: Allow web server EC2 instances to access S3 bucket for Udagram
+      Path: "/"
+      ManagedPolicyArns:
+        - !Ref AllowGetObjectForUdagramS3Bucket
+      RoleName: Allow-S3-Access-For-Udagram-Web-App
+      Tags:
+        - Key: Owner
+          Value: !Ref Owner
 
   AllowGetObjectForUdagramS3Bucket:
     Type: 'AWS::IAM::ManagedPolicy'

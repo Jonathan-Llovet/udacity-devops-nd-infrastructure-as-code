@@ -117,7 +117,49 @@ Resources:
             FromPort: 0
             ToPort: 65535
             CidrIp: 0.0.0.0/0:
-      
+
+    BastionHostsSecurityGroup:
+      Type: AWS::EC2::SecurityGroup
+      Properties:
+        GroupDescription: Enable SSH access via port 22
+        SecurityGroupIngress:
+        - CidrIp: 0.0.0.0/0
+          FromPort: 22
+          IpProtocol: tcp
+          ToPort: 22
+    
+    BastionHostAZ1:
+      Type: AWS::EC2::Instance
+      Properties:
+        AvailabilityZone:
+          Fn::ImportValue:
+            !Sub "${Environment}-Public-Subnet-AZ1"
+        ImageId: ami-0323c3dd2da7fb37d
+        InstanceType: t2.micro
+        SecurityGroups:
+          - !Ref BastionHostsSecurityGroup
+        Tags:
+          - Key: Owner
+            Value: !Ref Owner
+          - Key: Name
+            Value: !Sub "${Environment}-Bastion-Host-AZ1"
+    
+    BastionHostAZ2:
+      Type: AWS::EC2::Instance
+      Properties:
+        AvailabilityZone:
+          Fn::ImportValue:
+            !Sub "${Environment}-Public-Subnet-AZ2"
+        ImageId: ami-0323c3dd2da7fb37d
+        InstanceType: t2.micro
+        SecurityGroups:
+          - !Ref BastionHostsSecurityGroup
+        Tags:
+          - Key: Owner
+            Value: !Ref Owner
+          - Key: Name
+            Value: !Sub "${Environment}-Bastion-Host-AZ1"
+
     LoadBalancerSecurityGroup:
       Type: AWS::EC2::SecurityGroup
       Properties:

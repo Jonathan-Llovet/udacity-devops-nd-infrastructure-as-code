@@ -158,7 +158,7 @@ Resources:
           - Key: Owner
             Value: !Ref Owner
           - Key: Name
-            Value: !Sub "${Environment}-Bastion-Host-AZ1"
+            Value: !Sub "${Environment}-Bastion-Host-AZ2"
 
     LoadBalancerSecurityGroup:
       Type: AWS::EC2::SecurityGroup

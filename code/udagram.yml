@@ -183,7 +183,14 @@ Resources:
           - Key: Name
             Value: !Sub ${Environment}-Public-Route-Table
 
-# DefaultPublicRoute
+  DefaultPublicRoute: # Passes outbound traffic to the InternetGateway
+    Type: AWS::EC2::Route
+    DependsOn: InternetGatewayAttachment
+    Properties:
+      RouteTableId: !Ref PublicRouteTable
+      DestinationCidrBlock: 0.0.0.0/0 # traffic destination range
+      GatewayId: !Ref InternetGateway # send traffic here
+
 # PublicSubnet1RouteTableAssociation
 # PublicSubnet2RouteTableAssociation
 

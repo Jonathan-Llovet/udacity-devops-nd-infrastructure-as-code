@@ -239,16 +239,80 @@ Resources:
             !Sub "${Environment}-VPC"
 
 Outputs:
-  # AllowS3AccessForUdagramWebApp
-  # AllowGetObjectForUdagramS3Bucket
-  # WebAppLaunchConfig
-  # WebAppGroup
-  # WebServerSecurityGroup
-  # BastionHostsSecurityGroup
-  # BastionHostAZ1
-  # BastionHostAZ2
-  # LoadBalancerSecurityGroup
-  # WebAppLoadBalancer
-  # LoadBalancerListener
-  # LoadBalancerListenerRule
-  # WebAppTargetGroup
+  Role-AllowS3AccessForUdagramWebApp:
+    Description: A reference to the IAM Role to allow Udagram apps access to specified S3 bucket
+    Value: !Ref AllowS3AccessForUdagramWebApp
+    Export:
+      Name: Role-Allow-S3-Access-For-Udagram-Web-App
+
+  Policy-AllowGetObjectForUdagramS3Bucket:
+    Description: A reference to the IAM ManagedPolicy to allow Udagram apps access to specified S3 bucket
+    Value: !Ref AllowGetObjectForUdagramS3Bucket
+    Export:
+      Name: Policy-Allow-Get-Object-For-Udagram-S3-Bucket
+
+  WebAppLaunchConfig:
+    Description: A reference to the WebAppLaunchConfig for Udagram
+    Value: !Ref WebAppLaunchConfig
+    Export:
+      Name: Udagram-Web-App-Launch-Config
+
+  WebAppGroup:
+    Description: A reference to the WebAppGroup for Udagram
+    Value: !Ref WebAppGroup
+    Export:
+      Name: Udagram-Web-App-Group
+
+  WebServerSecurityGroup:
+    Description: A reference to the WebServerSecurityGroup for Udagram
+    Value: !Ref WebServerSecurityGroup
+    Export:
+      Name: WebServerSecurityGroup
+
+  BastionHostsSecurityGroup:
+    Description: A reference to BastionHostsSecurityGroup
+    Value: !Ref BastionHostsSecurityGroup
+    Export:
+      Name: BastionHostsSecurityGroup
+
+  BastionHostAZ1:
+    Description: A reference to the Bastion Host in AZ1
+    Value: !Ref BastionHostAZ1
+    Export:
+      Name: BastionHostAZ1
+
+  BastionHostAZ2:
+    Description: A reference to Bastion Host in AZ2
+    Value: !Ref BastionHostAZ2
+    Export:
+      Name: BastionHostAZ2
+
+  LoadBalancerSecurityGroup:
+    Description: A reference to the LoadBalancerSecurityGroup for Udagram
+    Value: !Ref LoadBalancerSecurityGroup
+    Export:
+      Name: Udagram-Load-Balancer-Security-Group
+
+  WebAppLoadBalancer:
+    Description: A reference to the WebAppLoadBalancer for Udagram
+    Value: !Ref WebAppLoadBalancer
+    Export:
+      Name: Udagram-Web-App-Load-Balancer
+
+  LoadBalancerListener:
+    Description: A reference to the LoadBalancerListener for Udagram
+    Value: !Ref LoadBalancerListener
+    Export:
+      Name: Udagram-Load-Balancer-Listener
+
+  LoadBalancerListenerRule:
+    Description: A reference to the LoadBalancerListenerRule for Udagram
+    Value: !Ref LoadBalancerListenerRule
+    Export:
+      Name: Udagram-Load-Balancer-Listener-Rule
+
+  WebAppTargetGroup:
+    Description: A reference to the WebAppTargetGroup for Udagram
+    Value: !Ref WebAppTargetGroup
+    Export:
+      Name: Udagram-Web-App-Target-Group

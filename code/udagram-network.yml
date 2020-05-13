@@ -1,5 +1,5 @@
 Description: >
-    Jonathan Llovet / Udacity DevOps Engineer ND 2020 - Udagram Project
+  Jonathan Llovet / Udacity DevOps Engineer ND 2020 - Udagram Project
 
 Parameters:
   Owner:
@@ -259,65 +259,4 @@ Resources:
         RouteTableId: !Ref PrivateRouteTable2
         SubnetId: !Ref PrivateSubnet2
 
-############################################################
-# EC2 Instances
-############################################################
-
-  AllowS3AccessForUdagramWebApp:
-    Type: AWS::IAM::Role
-    Properties:
-      AssumeRolePolicyDocument:
-        Version: '2012-10-17'
-        Statement:
-          - Effect: Allow
-            Principal:
-              Service:
-                - ec2.amazonaws.com
-            Action:
-              - 'sts:AssumeRole'
-      Description: Allow web server EC2 instances to access S3 bucket for Udagram
-      Path: "/"
-      ManagedPolicyArns:
-        - !Ref AllowGetObjectForUdagramS3Bucket
-      RoleName: Allow-S3-Access-For-Udagram-Web-App
-      Tags:
-        - Key: Owner
-          Value: !Ref Owner
-
-  AllowGetObjectForUdagramS3Bucket:
-    Type: 'AWS::IAM::ManagedPolicy'
-    Properties:
-      Description: Policy to allow access to Udacity Udagram S3 Bucket
-      ManagedPolicyName: Allow-Get-Object-For-Udagram-S3-Bucket
-      PolicyDocument:
-        Version: 2012-10-17
-        Statement:
-          - Effect: Allow
-            Action:
-              - 's3:GetObject'
-            Resource:
-              - 'arn:aws:s3:::udacity-demo-1/udacity.zip'
-
-    WebAppLaunchConfig:
-        Type: AWS::AutoScaling::LaunchConfiguration
-        Properties:
-          UserData:
-            Fn::Base64: !Sub |
-              #!/bin/bash
-              apt-get update -y
-              apt-get install unzip awscli -y
-              apt-get install apache2 -y
-              systemctl start apache2.service
-              cd /var/www/html
-              aws s3 cp s3://udacity-demo-1/udacity.zip .
-              unzip -o udacity.zip
-          ImageId: ami-085925f297f89fce1
-          KeyName: udagram-server
-          SecurityGroups:
-          - Ref: WebServerSecGroup
-          InstanceType: t3.medium
-          BlockDeviceMappings:
-          - DeviceName: "/dev/sdk"
-            Ebs:
-              VolumeSize: '10'
 Outputs:

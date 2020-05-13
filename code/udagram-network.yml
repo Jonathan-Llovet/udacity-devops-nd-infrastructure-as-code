@@ -1,6 +1,6 @@
 Description: >
-Jonathan Llovet / Udacity DevOps Engineer ND 2020 - Udagram Project
-Definition of network infrastructure
+  Jonathan Llovet / Udacity DevOps Engineer ND 2020 - Udagram Project
+  Definition of network infrastructure
 
 Parameters:
   Owner:
@@ -177,13 +177,13 @@ Resources:
 
   PublicRouteTable:
     Type: AWS::EC2::RouteTable
-      Properties:
-        VpcId: !Ref VPC
-        Tags:
-          - Key: Owner
-            Value: !Ref Owner
-          - Key: Name
-            Value: !Sub ${Environment}-Public-Route-Table
+    Properties:
+      VpcId: !Ref VPC
+      Tags:
+        - Key: Owner
+          Value: !Ref Owner
+        - Key: Name
+          Value: !Sub ${Environment}-Public-Route-Table
 
   DefaultPublicRoute: # Passes outbound traffic to the InternetGateway
     Type: AWS::EC2::Route
@@ -213,13 +213,13 @@ Resources:
 
   PrivateRouteTable1:
     Type: AWS::EC2::RouteTable
-      Properties:
-        VpcId: !Ref VPC
-        Tags:
-          - Key: Owner
-            Value: !Ref Owner
-          - Key: Name
-            Value: !Sub ${Environment}-Private-Route-Table-AZ1
+    Properties:
+      VpcId: !Ref VPC
+      Tags:
+        - Key: Owner
+          Value: !Ref Owner
+        - Key: Name
+          Value: !Sub ${Environment}-Private-Route-Table-AZ1
 
   DefaultPrivateRoute1:
     Type: AWS::EC2::Route
@@ -231,20 +231,20 @@ Resources:
 
   PrivateSubnet1RouteTableAssociation:
     Type: AWS::EC2::SubnetRouteTableAssociation
-      Properties:
-        RouteTableId: !Ref PrivateRouteTable1
-        SubnetId: !Ref PrivateSubnet1
+    Properties:
+      RouteTableId: !Ref PrivateRouteTable1
+      SubnetId: !Ref PrivateSubnet1
 
 # AZ 2
   PrivateRouteTable2:
     Type: AWS::EC2::RouteTable
-      Properties:
-        VpcId: !Ref VPC
-        Tags:
-          - Key: Owner
-            Value: !Ref Owner
-          - Key: Name
-            Value: !Sub ${Environment}-Private-Route-Table-AZ2
+    Properties:
+      VpcId: !Ref VPC
+      Tags:
+        - Key: Owner
+          Value: !Ref Owner
+        - Key: Name
+          Value: !Sub ${Environment}-Private-Route-Table-AZ2
 
   DefaultPrivateRoute2:
     Type: AWS::EC2::Route
@@ -256,9 +256,9 @@ Resources:
 
   PrivateSubnet2RouteTableAssociation:
     Type: AWS::EC2::SubnetRouteTableAssociation
-      Properties:
-        RouteTableId: !Ref PrivateRouteTable2
-        SubnetId: !Ref PrivateSubnet2
+    Properties:
+      RouteTableId: !Ref PrivateRouteTable2
+      SubnetId: !Ref PrivateSubnet2
 
 Outputs:
 

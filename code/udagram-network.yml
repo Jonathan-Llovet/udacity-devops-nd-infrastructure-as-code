@@ -260,3 +260,63 @@ Resources:
         SubnetId: !Ref PrivateSubnet2
 
 Outputs:
+
+  VPC:
+    Description: A reference to the created VPC
+    Value: !Ref VPC
+    Export:
+      Name: !Sub ${Environment}-VPC
+
+  VPCPublicRouteTable:
+    Description: A reference to the public route table for the VPC
+    Value: !Ref PublicRouteTable
+    Export:
+      Name: !Sub ${Environment}-Public-RouteTable
+
+  VPCPrivateRouteTable1:
+    Description: A reference to the private route table in AZ1
+    Value: !Ref PrivateRouteTable1
+    Export:
+      Name: !Sub ${Environment}-Private-RouteTable-AZ1
+
+  VPCPrivateRouteTable2:
+    Description: A reference to the private route table in AZ2 for the VPC
+    Value: !Ref PrivateRouteTable2
+    Export:
+      Name: !Sub ${Environment}-Private-RouteTable-AZ2
+
+  PublicSubnets:
+    Description: A list of references to the public subnets
+    Value: !Join [ ",", [ !Ref PublicSubnet1, !Ref PublicSubnet2 ]]
+    Export:
+      Name: !Sub ${Environment}-Public-Subnets
+
+  PrivateSubnets:
+    Description: A list of references to the private subnets
+    Value: !Join [ ",", [ !Ref PrivateSubnet1, !Ref PrivateSubnet2 ]]
+    Export:
+      Name: !Sub ${Environment}-Private-Subnets
+
+  PublicSubnet1:
+    Description: A reference to the public subnet in the 1st Availability Zone
+    Value: !Ref PublicSubnet1
+    Export:
+      Name: !Sub ${Environment}-Public-Subnet-AZ1
+
+  PublicSubnet2:
+    Description: A reference to the public subnet in the 2nd Availability Zone
+    Value: !Ref PublicSubnet2
+    Export:
+      Name: !Sub ${Environment}-Public-Subnet-AZ2
+
+  PrivateSubnet1:
+    Description: A reference to the private subnet in the 1st Availability Zone
+    Value: !Ref PrivateSubnet1
+    Export:
+      Name: !Sub ${Environment}-Private-Subnet-AZ1
+
+  PrivateSubnet2:
+    Description: A reference to the private subnet in the 2nd Availability Zone
+    Value: !Ref PrivateSubnet2
+    Export:
+      Name: !Sub ${Environment}-Private-Subnet-AZ2

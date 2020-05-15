@@ -30,7 +30,7 @@ Resources:
     Properties: 
       InstanceProfileName: Udagram-Web-Server
       Path: "/"
-      Roles: 
+      Roles:
         - !Ref AllowS3AccessForUdagramWebAppRole
 
   AllowS3AccessForUdagramWebAppRole:

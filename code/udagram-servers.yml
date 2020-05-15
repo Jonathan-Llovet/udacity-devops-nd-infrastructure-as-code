@@ -48,7 +48,7 @@ Resources:
       Description: Allow web server EC2 instances to access S3 bucket for Udagram
       Path: "/"
       ManagedPolicyArns:
-        - !Ref AllowGetObjectForUdagramS3Bucket
+        - !Ref AllowGetObjectForUdagramS3BucketPolicy
       RoleName: Allow-S3-Access-For-Udagram-Web-App
       Tags:
         - Key: Owner
@@ -259,17 +259,17 @@ Resources:
           !Sub "${Environment}-VPC"
 
 Outputs:
-  RoleAllowS3AccessForUdagramWebApp:
+  AllowS3AccessForUdagramWebAppRole:
     Description: A reference to the IAM Role to allow Udagram apps access to specified S3 bucket
-    Value: !Ref AllowS3AccessForUdagramWebApp
+    Value: !Ref AllowS3AccessForUdagramWebAppRole
     Export:
-      Name: Role-Allow-S3-Access-For-Udagram-Web-App
+      Name: Allow-S3-Access-For-Udagram-Web-App-Role
 
-  PolicyAllowGetObjectForUdagramS3Bucket:
+  AllowGetObjectForUdagramS3BucketPolicy:
     Description: A reference to the IAM ManagedPolicy to allow Udagram apps access to specified S3 bucket
-    Value: !Ref AllowGetObjectForUdagramS3Bucket
+    Value: !Ref AllowGetObjectForUdagramS3BucketPolicy
     Export:
-      Name: Policy-Allow-Get-Object-For-Udagram-S3-Bucket
+      Name: Allow-Get-Object-For-Udagram-S3-Bucket-Policy
 
   WebAppLaunchConfig:
     Description: A reference to the WebAppLaunchConfig for Udagram

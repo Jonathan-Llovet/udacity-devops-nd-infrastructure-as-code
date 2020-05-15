@@ -25,7 +25,15 @@ Resources:
 # IAM Role and Policy
 ############################################################
 
-  AllowS3AccessForUdagramWebApp:
+  UdagramWebServerInstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    Properties: 
+      InstanceProfileName: Udagram-Web-Server
+      Path: "/"
+      Roles: 
+        - !Ref AllowS3AccessForUdagramWebAppRole
+
+  AllowS3AccessForUdagramWebAppRole:
     Type: AWS::IAM::Role
     Properties:
       AssumeRolePolicyDocument:
@@ -46,7 +54,7 @@ Resources:
         - Key: Owner
           Value: !Ref Owner
 
-  AllowGetObjectForUdagramS3Bucket:
+  AllowGetObjectForUdagramS3BucketPolicy:
     Type: 'AWS::IAM::ManagedPolicy'
     Properties:
       Description: Policy to allow access to Udacity Udagram S3 Bucket
@@ -126,6 +134,9 @@ Resources:
     Type: AWS::EC2::SecurityGroup
     Properties:
       GroupDescription: Enable SSH access via port 22
+      VpcId:
+        Fn::ImportValue:
+          !Sub "${Environment}-VPC"
       SecurityGroupIngress:
       - CidrIp: 0.0.0.0/0
         FromPort: 22
@@ -138,10 +149,13 @@ Resources:
       AvailabilityZone:
         Fn::ImportValue:
           !Sub ${Environment}-AZ1
+      SubnetId:
+        Fn::ImportValue:
+          !Sub ${Environment}-Public-Subnet-AZ1
       ImageId: ami-0323c3dd2da7fb37d
       InstanceType: t2.micro
       KeyName: udagram-bastion-host
-      SecurityGroups:
+      SecurityGroupIds:
         - !Ref BastionHostsSecurityGroup
       Tags:
         - Key: Owner
@@ -155,10 +169,13 @@ Resources:
       AvailabilityZone:
         Fn::ImportValue:
           !Sub ${Environment}-AZ2
+      SubnetId:
+        Fn::ImportValue:
+          !Sub ${Environment}-Public-Subnet-AZ2
       ImageId: ami-0323c3dd2da7fb37d
       InstanceType: t2.micro
       KeyName: udagram-bastion-host
-      SecurityGroups:
+      SecurityGroupIds:
         - !Ref BastionHostsSecurityGroup
       Tags:
         - Key: Owner

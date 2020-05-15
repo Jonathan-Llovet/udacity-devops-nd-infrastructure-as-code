@@ -87,6 +87,8 @@ Resources:
           unzip -o udacity.zip
       ImageId: ami-085925f297f89fce1
       KeyName: udagram-server
+      IamInstanceProfile:
+        !Ref UdagramWebServerInstanceProfile
       SecurityGroups:
       - Ref: WebServerSecurityGroup
       InstanceType: t3.medium

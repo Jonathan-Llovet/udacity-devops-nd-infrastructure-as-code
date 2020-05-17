@@ -19,6 +19,14 @@ Parameters:
       - QA
       - Prod
 
+  WebServerKeyName:
+    Description: Name of SSH Key used for web servers
+    Type: String
+
+  BastionHostKeyName:
+    Description: Name of SSH Key used for web servers
+    Type: String
+
 Resources:
 
 ############################################################
@@ -86,7 +94,7 @@ Resources:
           aws s3 cp s3://udacity-demo-1/udacity.zip .
           unzip -o udacity.zip
       ImageId: ami-085925f297f89fce1
-      KeyName: udagram-server
+      KeyName: !Ref WebServerKeyName
       IamInstanceProfile:
         !Ref UdagramWebServerInstanceProfile
       SecurityGroups:
@@ -156,7 +164,7 @@ Resources:
           !Sub ${Environment}-Public-Subnet-AZ1
       ImageId: ami-0323c3dd2da7fb37d
       InstanceType: t2.micro
-      KeyName: udagram-bastion-host
+      KeyName: !Ref BastionHostKeyName
       SecurityGroupIds:
         - !Ref BastionHostsSecurityGroup
       Tags:
@@ -176,7 +184,7 @@ Resources:
           !Sub ${Environment}-Public-Subnet-AZ2
       ImageId: ami-0323c3dd2da7fb37d
       InstanceType: t2.micro
-      KeyName: udagram-bastion-host
+      KeyName: !Ref BastionHostKeyName
       SecurityGroupIds:
         - !Ref BastionHostsSecurityGroup
       Tags:

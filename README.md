@@ -52,7 +52,20 @@ aws cloudformation create-stack \
 ```
 
 ### Testing the application
-Once the networking and server infrastructure has been created, you can reach the application by reaching the DNS endpoint of your load balancer. You can configure the DNS records through AWS's service Route 53 to be a more attractive name. For testing, you can retrieve the DNS name for your load balancer through the AWS Console by going to Services -> EC2 -> Load Balancers. There, when you select the load balancer that has been created in the servers stack, the DNS name will be in the `Basic Configuration` section of the details displayed at the bottom of the screen.
+Once the networking and server infrastructure has been created, you can reach the application by reaching the DNS endpoint of your load balancer. You can configure the DNS records through AWS's service Route 53 to be a more attractive name.
+
+For testing, you can retrieve the DNS name for your load balancer several ways.
+
+- Through the AWS Console
+    - Option 1
+        - Go to Services -> EC2 -> Load Balancers
+        - There, when you select the load balancer that has been created in the servers stack, the DNS name will be in the `Basic Configuration` section of the details displayed at the bottom of the screen.
+    - Option 2
+        - Go to Services -> Cloudformation -> Stacks -> `udagram-servers` -> Outputs
+        - There, the DNS name for the load balancer can be found under `WebAppLoadBalancerDNSName`
+- Through the aws cloudformation cli
+    - Run `aws cloudformation list-exports`
+    - The DNS name for the load balancer is available under `Web-App-Load-Balancer-DNS-Name`
 
 When you send a request to the load balancer using this DNS value, you will receive a response from the web server. If you are using the sample app Udagram, you should see a message saying "It Works!"
 

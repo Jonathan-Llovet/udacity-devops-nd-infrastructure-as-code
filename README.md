@@ -20,7 +20,7 @@ Instructions for creating, deleting, and testing the infrastructure can be found
 
 - Have an AWS Account with sufficient permissions to create networking and server resources. [Need to create an account?](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/)
     - Note: Some of the features here will not be covered by the AWS free tier. Destroy or stop any unused resources to avoid usage costs.
-- If you want to ssh into the instances, create ssh keys and add the names in `udagram-servers-parameters.json`.
+- If you want to ssh into the instances, create ssh keys and add the names in `udagram-servers-parameters.json`. For additional instructions, see the additional instructions below.
 - [Install the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) to manage resources from the command line. 
 
 ### Creating the stacks

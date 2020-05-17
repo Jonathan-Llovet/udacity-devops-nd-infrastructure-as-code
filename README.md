@@ -55,12 +55,12 @@ When you are finished with the stacks and want to delete them, you can use the f
 
 ```SHELL
 delete-stack \
---stack-name udagram-network \
+--stack-name udagram-network
 ```
 
 ```SHELL
 delete-stack \
---stack-name udagram-servers \
+--stack-name udagram-servers
 ```
 
 ### Connecting securely to web servers through bastion hosts for troubleshooting

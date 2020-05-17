@@ -20,7 +20,46 @@ Instructions for creating, deleting, and testing the infrastructure can be found
 
 - Have an AWS Account with sufficient permissions to create networking and server resources. [Need to create an account?](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/). Note: Some of the features here will not be covered by the AWS free tier. Destroy or stop any unused resources to avoid usage costs.
 - If you want to ssh into the instances, create ssh keys and add the names in `udagram-servers-parameters.json`.
+- [Install the AWS CLI](https://docs.aws.amazon.com/cli/latest/userguide/cli-chap-install.html) to manage resources from the command line. 
 
-### Creating a stack
+### Creating the stacks
+There are two stacks needed for the application. To deploy the stacks, you can use the following commands to provision them.
+
+Full documentation on the aws cloudformation cli is available [here](https://docs.aws.amazon.com/cli/latest/reference/cloudformation/index.html).
+
+Create the networking stack.
+
+```SHELL
+aws cloudformation create-stack \
+--stack-name udagram-network \
+--template-body file://udagram-network.yml \
+--parameters file://udagram-network-parameters.json \
+--region=us-east-1
+```
+
+Create the servers stack.
+- This creates IAM Policies, Roles, and Instance Profiles, which require explicit acknowledgement through the `--capabilities` flag to create on the CLI.
+
+```SHELL
+aws cloudformation create-stack \
+--stack-name udagram-servers \
+--template-body file://udagram-servers.yml \
+--parameters file://udagram-servers-parameters.json \
+--region=us-east-1 \
+--capabilities CAPABILITY_NAMED_IAM
+```
+
+### Deleting the stacks
+When you are finished with the stacks and want to delete them, you can use the following commands.
+
+```SHELL
+delete-stack \
+--stack-name udagram-network \
+```
+
+```SHELL
+delete-stack \
+--stack-name udagram-servers \
+```
 
 ### Connecting securely to web servers through bastion hosts for troubleshooting

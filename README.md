@@ -18,6 +18,8 @@ Instructions for creating, deleting, and testing the infrastructure can be found
 
 ### Prerequisites
 
+- Have an AWS Account. [Need to create one?](https://aws.amazon.com/premiumsupport/knowledge-center/create-and-activate-aws-account/).
+
 ### Creating a stack
 
 ### Connecting securely to web servers through bastion hosts for troubleshooting

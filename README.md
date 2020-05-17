@@ -91,5 +91,7 @@ delete-stack \
 ### Connecting securely to web servers through bastion hosts for troubleshooting
 One way to connect securely the web servers is by using SSH Agent forwarding, which allows you to connect to the web server with the bastion host without copying your ssh key to the bastion host directly, which prevents your web servers from being compromised if your bastion host is hacked.
 
+To use ssh keys with the web servers, you will need to uncomment the `KeyName` property in `WebAppLaunchConfig` in `udagram-servers.yml`. Additionally, you will need to provide the name of an SSH key that you have access to. Following that, follow the guide below to connect to a web server using SSH Agent forwarding.
+
 - [Handling Bastion Hosts on AWS via SSH Agent Forwarding](https://medium.com/@crishantha/handing-bastion-hosts-on-aws-via-ssh-agent-forwarding-f1d2d4e8622a)
 - [ssh-add documentation](https://linux.die.net/man/1/ssh-add)

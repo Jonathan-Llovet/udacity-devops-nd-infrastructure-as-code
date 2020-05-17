@@ -27,7 +27,7 @@ There are two stacks needed for the application. To deploy the stacks, you can u
 
 Full documentation on the aws cloudformation cli is available [here](https://docs.aws.amazon.com/cli/latest/reference/cloudformation/index.html).
 
-Create the networking stack.
+#### Create the networking stack
 
 ```SHELL
 aws cloudformation create-stack \
@@ -37,7 +37,8 @@ aws cloudformation create-stack \
 --region=us-east-1
 ```
 
-Create the servers stack.
+#### Create the servers stack
+
 - This creates IAM Policies, Roles, and Instance Profiles, which require explicit acknowledgement through the `--capabilities` flag to create on the CLI.
 
 ```SHELL

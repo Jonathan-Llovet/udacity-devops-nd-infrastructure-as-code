@@ -26,6 +26,11 @@ Parameters:
   BastionHostKeyName:
     Description: Name of SSH Key used for web servers
     Type: String
+  
+  BastionHostsSecurityGroupIngressCIDR:
+    Description: CIDR block that is allowed to connect to bastion hosts over ssh. It is recommended you restrict this to your IP address for testing.
+    Type: String
+    Default: 0.0.0.0/0
 
 Resources:
 
@@ -148,7 +153,7 @@ Resources:
         Fn::ImportValue:
           !Sub "${Environment}-VPC"
       SecurityGroupIngress:
-      - CidrIp: 0.0.0.0/0
+      - CidrIp: !Ref BastionHostsSecurityGroupIngressCIDR
         FromPort: 22
         IpProtocol: tcp
         ToPort: 22

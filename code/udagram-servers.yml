@@ -329,6 +329,14 @@ Outputs:
     Export:
       Name: Udagram-Web-App-Load-Balancer
 
+  WebAppLoadBalancerDNSName:
+    Description: The DNS name of the WebAppLoadBalancer for Udagram
+    Value: !Sub 
+      - "http://${LoadBalancerDNS}"
+      - {LoadBalancerDNS: !GetAtt WebAppLoadBalancer.DNSName}
+    Export:
+      Name: Web-App-Load-Balancer-DNS-Name
+
   LoadBalancerListener:
     Description: A reference to the LoadBalancerListener for Udagram
     Value: !Ref LoadBalancerListener

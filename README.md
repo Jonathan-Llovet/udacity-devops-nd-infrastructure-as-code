@@ -51,6 +51,17 @@ aws cloudformation create-stack \
 --capabilities CAPABILITY_NAMED_IAM
 ```
 
+### Testing the application
+Once the networking and server infrastructure has been created, you can reach the application by reaching the DNS endpoint of your load balancer. You can configure the DNS records through AWS's service Route 53 to be a more attractive name. For testing, you can retrieve the DNS name for your load balancer through the AWS Console by going to Services -> EC2 -> Load Balancers. There, when you select the load balancer that has been created in the servers stack, the DNS name will be in the `Basic Configuration` section of the details displayed at the bottom of the screen.
+
+When you send a request to the load balancer using this DNS value, you will receive a response from the web server. If you are using the sample app Udagram, you should see a message saying "It Works!"
+
+For more information about Route 53 and DNS:
+- [Route 53](https://www.youtube.com/watch?v=10JKpg-eqZU)
+    - [Documentation](https://docs.aws.amazon.com/route53/)
+- [DNS](https://www.youtube.com/watch?v=VwpP8PUzqLw)
+    - [RFC 2929](https://tools.ietf.org/html/rfc2929)
+
 ### Deleting the stacks
 When you are finished with the stacks and want to delete them, you can use the following commands.
 
